@@ -1,0 +1,40 @@
+{
+    "Id": "HelloWorld",
+    "Version": 1,
+    "DataType": "CustomData, PipelineIOApp",
+    "Steps": [
+        {
+            "Id": "First",
+            "StepType": "First, PipelineIOApp",
+            "NextStepId": "Second",
+            "Outputs": {
+                "Value1": "step.Output1",
+                "Value2": "step.Output2"
+            }
+        },
+        {
+            "Id": "Second",
+            "StepType": "HelloWorld, PipelineIOApp",
+            "NextStepId": "Third",
+            "Inputs": {
+                "Input1": "data.Value1",
+                "Input2": "data.Value2"
+            },
+            "Outputs": {
+                "Value3": "step.Output"
+            }
+        },
+        {
+            "Id": "Third",
+            "StepType": "CustomMessage, PipelineIOApp",
+            "NextStepId": "Bye",
+            "Inputs": {
+                "Message": "\"The answer is: \" + data.Value3.ToString()"
+            }
+        },
+        {
+            "Id": "Bye",
+            "StepType": "GoodbyeWorld, PipelineIOApp"
+        }
+    ]
+}
